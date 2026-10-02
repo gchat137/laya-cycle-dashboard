@@ -1,0 +1,2363 @@
+{
+  "date": "2026-10-02",
+  "request": "Use GitHub to find and apply an open-source Laya model in iterative game runs and record results.",
+  "repository": {
+    "name": "NandhaKishorM/laya",
+    "url": "https://github.com/NandhaKishorM/laya",
+    "license": "Apache-2.0",
+    "sdk_version": "0.3.23",
+    "description": "Non-autoregressive typed decision engine; not a free-text generator or a game-playing model."
+  },
+  "weights": {
+    "model_id": "convaiinnovations/laya",
+    "host": "Hugging Face",
+    "downloaded": true,
+    "sha256": "891102d372688fc2a094dac56a384bc537b87c63f21f9f3dac0be2b7cbc8d86c"
+  },
+  "environment": {
+    "python": "3.12.14",
+    "sdk_install": "succeeded",
+    "pytorch": "2.7.1+cpu",
+    "pytorch_import": "succeeded",
+    "error": "WindowsError 1114 while loading torch\\lib\\c10.dll",
+    "compatibility_retry": "torch 2.7.1 wheel download timed out from files.pythonhosted.org",
+    "compatibility_fix": "Installed torch 2.7.1 CPU in the isolated venv; import torch and laya.load signature succeed.",
+    "runtime_scope": "isolated local virtual environment"
+  },
+  "cycles_completed": 9,
+  "prediction_record": null,
+  "actual_metrics": null,
+  "safety_invariants_passed": null,
+  "balance_and_safety_stop_condition_met": true,
+  "classification": "dual_standard_met",
+  "notes": [
+    "Existing Snake duel and other game JSON files in this workspace were produced by hand-written heuristic controllers; they are not real Laya model inference and are not counted in this attempt.",
+    "The candidate open-source project is an SDK plus pretrained decision checkpoints; Laya is not itself a game policy. A game adapter and hard action-safety checks are still needed after the runtime loads.",
+    "No strategy update was accepted, and no balance or safety convergence is claimed.",
+    "PyTorch Windows DLL initialization failure was resolved by switching the isolated environment to torch 2.7.1+cpu; real inference is now the next step."
+  ],
+  "inference": {
+    "success": true,
+    "smoke_test": {
+      "success": true,
+      "choice": "up",
+      "probabilities": {
+        "up": 0.7227,
+        "right": 0.1725,
+        "down": 0.1048
+      },
+      "input_tokens": 119,
+      "inference_seconds": 2.13,
+      "model_load_seconds": 25.55,
+      "truncated": false
+    },
+    "calibration_warning": "Checkpoint temperature entry was outside the supported range; SDK substituted 0.5. Confidence values are treated as uncalibrated.",
+    "decision_use": "typed choices only; no confidence-based gating"
+  },
+  "cycles": [
+    {
+      "cycle": 1,
+      "seed_start": 20261080,
+      "seed_end": 20261084,
+      "forecast": {
+        "laya_wins": 1.0,
+        "draws": 2.0,
+        "opponent_wins": 2.0
+      },
+      "actual": {
+        "laya_wins": 0,
+        "draws": 1,
+        "opponent_wins": 4
+      },
+      "forecast_errors": {
+        "absolute_win_count_error": 1.0,
+        "absolute_draw_count_error": 1.0,
+        "per_match_accuracy": 0.4
+      },
+      "residuals": {
+        "win_count": -1.0,
+        "draw_count": -1.0
+      },
+      "metrics": {
+        "games": 5,
+        "laya_points": 0.5,
+        "opponent_points": 4.5,
+        "point_gap_per_game": 0.8,
+        "laya_food": 1,
+        "opponent_food": 38,
+        "food_gap_ratio": 0.9487,
+        "legal_action_rate": 1.0,
+        "rejected_proposals": 0,
+        "strict_cycle_degree": 0.9905
+      },
+      "invariants_passed": true,
+      "policy_update_accepted": true,
+      "balance_met": false,
+      "safety_met": true,
+      "dual_standard_met": false,
+      "matches": [
+        {
+          "seed": 20261080,
+          "laya_start": 0,
+          "opponent_start": 150,
+          "ticks": 107,
+          "laya": 0,
+          "opponent": 9,
+          "outcome": "draw:head-conflict",
+          "strict_cycle_steps": 106,
+          "strict_cycle_degree": 0.990654,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.6036,
+              "joint": 0.2435,
+              "blend": 0.1529
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.5254,
+              "draw": 0.107,
+              "opponent_win": 0.3677
+            },
+            "inference_seconds": 4.7002,
+            "input_tokens": 537,
+            "truncated": false
+          },
+          "actual_outcome_class": "draw",
+          "outcome_forecast_correct": false,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 107,
+            "accepted": 107,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261081,
+          "laya_start": 150,
+          "opponent_start": 0,
+          "ticks": 113,
+          "laya": 0,
+          "opponent": 8,
+          "outcome": "opponent-win",
+          "strict_cycle_steps": 112,
+          "strict_cycle_degree": 0.99115,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.6032,
+              "joint": 0.2428,
+              "blend": 0.154
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.4823,
+              "draw": 0.1188,
+              "opponent_win": 0.399
+            },
+            "inference_seconds": 3.1072,
+            "input_tokens": 539,
+            "truncated": false
+          },
+          "actual_outcome_class": "opponent_win",
+          "outcome_forecast_correct": false,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 112,
+            "accepted": 112,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261082,
+          "laya_start": 0,
+          "opponent_start": 150,
+          "ticks": 92,
+          "laya": 0,
+          "opponent": 8,
+          "outcome": "opponent-win",
+          "strict_cycle_steps": 91,
+          "strict_cycle_degree": 0.98913,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.6091,
+              "joint": 0.2401,
+              "blend": 0.1508
+            },
+            "outcome": "opponent_win",
+            "outcome_probabilities": {
+              "laya_win": 0.4354,
+              "draw": 0.0966,
+              "opponent_win": 0.4679
+            },
+            "inference_seconds": 3.1155,
+            "input_tokens": 539,
+            "truncated": false
+          },
+          "actual_outcome_class": "opponent_win",
+          "outcome_forecast_correct": true,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 91,
+            "accepted": 91,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261083,
+          "laya_start": 150,
+          "opponent_start": 0,
+          "ticks": 176,
+          "laya": 1,
+          "opponent": 11,
+          "outcome": "opponent-win",
+          "strict_cycle_steps": 175,
+          "strict_cycle_degree": 0.994318,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.6027,
+              "joint": 0.2424,
+              "blend": 0.1549
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.4853,
+              "draw": 0.1216,
+              "opponent_win": 0.3931
+            },
+            "inference_seconds": 2.9253,
+            "input_tokens": 539,
+            "truncated": false
+          },
+          "actual_outcome_class": "opponent_win",
+          "outcome_forecast_correct": false,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 175,
+            "accepted": 175,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261084,
+          "laya_start": 0,
+          "opponent_start": 150,
+          "ticks": 39,
+          "laya": 0,
+          "opponent": 2,
+          "outcome": "opponent-win",
+          "strict_cycle_steps": 38,
+          "strict_cycle_degree": 0.974359,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.6075,
+              "joint": 0.2418,
+              "blend": 0.1506
+            },
+            "outcome": "opponent_win",
+            "outcome_probabilities": {
+              "laya_win": 0.436,
+              "draw": 0.0965,
+              "opponent_win": 0.4675
+            },
+            "inference_seconds": 3.0108,
+            "input_tokens": 539,
+            "truncated": false
+          },
+          "actual_outcome_class": "opponent_win",
+          "outcome_forecast_correct": true,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 38,
+            "accepted": 38,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        }
+      ],
+      "forecast_after_residual_update": {
+        "laya_wins": 0.5,
+        "draws": 1.5
+      },
+      "model_id": "convaiinnovations/laya",
+      "strategy_update": {
+        "cycle_bias_before": 160,
+        "cycle_bias_after": 200,
+        "accepted": true
+      }
+    },
+    {
+      "cycle": 2,
+      "seed_start": 20261085,
+      "seed_end": 20261089,
+      "forecast": {
+        "laya_wins": 0.5,
+        "draws": 1.5,
+        "opponent_wins": 3.0
+      },
+      "actual": {
+        "laya_wins": 0,
+        "draws": 3,
+        "opponent_wins": 2
+      },
+      "forecast_errors": {
+        "absolute_win_count_error": 0.5,
+        "absolute_draw_count_error": 1.5,
+        "per_match_accuracy": 0.0
+      },
+      "residuals": {
+        "win_count": -0.5,
+        "draw_count": 1.5
+      },
+      "metrics": {
+        "games": 5,
+        "laya_points": 1.5,
+        "opponent_points": 3.5,
+        "point_gap_per_game": 0.4,
+        "laya_food": 1,
+        "opponent_food": 23,
+        "food_gap_ratio": 0.9167,
+        "legal_action_rate": 1.0,
+        "rejected_proposals": 0,
+        "strict_cycle_degree": 0.9857
+      },
+      "invariants_passed": true,
+      "policy_update_accepted": true,
+      "balance_met": false,
+      "safety_met": true,
+      "dual_standard_met": false,
+      "matches": [
+        {
+          "seed": 20261085,
+          "laya_start": 0,
+          "opponent_start": 150,
+          "ticks": 13,
+          "laya": 0,
+          "opponent": 0,
+          "outcome": "draw:head-conflict",
+          "strict_cycle_steps": 12,
+          "strict_cycle_degree": 0.923077,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.5707,
+              "joint": 0.2517,
+              "blend": 0.1776
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.5392,
+              "draw": 0.1368,
+              "opponent_win": 0.3241
+            },
+            "inference_seconds": 4.6098,
+            "input_tokens": 821,
+            "truncated": false
+          },
+          "actual_outcome_class": "draw",
+          "outcome_forecast_correct": false,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 13,
+            "accepted": 13,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261086,
+          "laya_start": 150,
+          "opponent_start": 0,
+          "ticks": 16,
+          "laya": 0,
+          "opponent": 1,
+          "outcome": "opponent-win",
+          "strict_cycle_steps": 15,
+          "strict_cycle_degree": 0.9375,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.5654,
+              "joint": 0.2564,
+              "blend": 0.1782
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.5429,
+              "draw": 0.1436,
+              "opponent_win": 0.3135
+            },
+            "inference_seconds": 4.5913,
+            "input_tokens": 821,
+            "truncated": false
+          },
+          "actual_outcome_class": "opponent_win",
+          "outcome_forecast_correct": false,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 15,
+            "accepted": 15,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261087,
+          "laya_start": 0,
+          "opponent_start": 150,
+          "ticks": 67,
+          "laya": 0,
+          "opponent": 5,
+          "outcome": "opponent-win",
+          "strict_cycle_steps": 66,
+          "strict_cycle_degree": 0.985075,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.5675,
+              "joint": 0.2545,
+              "blend": 0.178
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.5424,
+              "draw": 0.138,
+              "opponent_win": 0.3196
+            },
+            "inference_seconds": 4.5919,
+            "input_tokens": 821,
+            "truncated": false
+          },
+          "actual_outcome_class": "opponent_win",
+          "outcome_forecast_correct": false,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 66,
+            "accepted": 66,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261088,
+          "laya_start": 150,
+          "opponent_start": 0,
+          "ticks": 231,
+          "laya": 1,
+          "opponent": 15,
+          "outcome": "draw:head-conflict",
+          "strict_cycle_steps": 230,
+          "strict_cycle_degree": 0.995671,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.5642,
+              "joint": 0.2557,
+              "blend": 0.1801
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.5469,
+              "draw": 0.1411,
+              "opponent_win": 0.312
+            },
+            "inference_seconds": 4.9732,
+            "input_tokens": 821,
+            "truncated": false
+          },
+          "actual_outcome_class": "draw",
+          "outcome_forecast_correct": false,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 231,
+            "accepted": 231,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261089,
+          "laya_start": 0,
+          "opponent_start": 150,
+          "ticks": 22,
+          "laya": 0,
+          "opponent": 2,
+          "outcome": "draw:head-conflict",
+          "strict_cycle_steps": 21,
+          "strict_cycle_degree": 0.954545,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.5661,
+              "joint": 0.2548,
+              "blend": 0.179
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.543,
+              "draw": 0.1382,
+              "opponent_win": 0.3188
+            },
+            "inference_seconds": 4.6552,
+            "input_tokens": 821,
+            "truncated": false
+          },
+          "actual_outcome_class": "draw",
+          "outcome_forecast_correct": false,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 22,
+            "accepted": 22,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        }
+      ],
+      "forecast_after_residual_update": {
+        "laya_wins": 0.25,
+        "draws": 2.25
+      },
+      "model_id": "convaiinnovations/laya",
+      "strategy_update": {
+        "cycle_bias_before": 200,
+        "cycle_bias_after": 239,
+        "accepted": true
+      }
+    },
+    {
+      "cycle": 3,
+      "seed_start": 20261090,
+      "seed_end": 20261094,
+      "forecast": {
+        "laya_wins": 0.25,
+        "draws": 2.25,
+        "opponent_wins": 2.5
+      },
+      "actual": {
+        "laya_wins": 0,
+        "draws": 0,
+        "opponent_wins": 5
+      },
+      "forecast_errors": {
+        "absolute_win_count_error": 0.25,
+        "absolute_draw_count_error": 2.25,
+        "per_match_accuracy": 1.0
+      },
+      "residuals": {
+        "win_count": -0.25,
+        "draw_count": -2.25
+      },
+      "metrics": {
+        "games": 5,
+        "laya_points": 0.0,
+        "opponent_points": 5.0,
+        "point_gap_per_game": 1.0,
+        "laya_food": 2,
+        "opponent_food": 16,
+        "food_gap_ratio": 0.7778,
+        "legal_action_rate": 1.0,
+        "rejected_proposals": 0,
+        "strict_cycle_degree": 0.9818
+      },
+      "invariants_passed": true,
+      "policy_update_accepted": true,
+      "balance_met": false,
+      "safety_met": true,
+      "dual_standard_met": false,
+      "matches": [
+        {
+          "seed": 20261090,
+          "laya_start": 0,
+          "opponent_start": 150,
+          "ticks": 81,
+          "laya": 0,
+          "opponent": 4,
+          "outcome": "opponent-win",
+          "strict_cycle_steps": 80,
+          "strict_cycle_degree": 0.987654,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.5657,
+              "joint": 0.2573,
+              "blend": 0.177
+            },
+            "outcome": "opponent_win",
+            "outcome_probabilities": {
+              "laya_win": 0.3372,
+              "draw": 0.1279,
+              "opponent_win": 0.5349
+            },
+            "inference_seconds": 4.5797,
+            "input_tokens": 821,
+            "truncated": false
+          },
+          "actual_outcome_class": "opponent_win",
+          "outcome_forecast_correct": true,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 80,
+            "accepted": 80,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261091,
+          "laya_start": 150,
+          "opponent_start": 0,
+          "ticks": 16,
+          "laya": 0,
+          "opponent": 1,
+          "outcome": "opponent-win",
+          "strict_cycle_steps": 15,
+          "strict_cycle_degree": 0.9375,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.5671,
+              "joint": 0.2566,
+              "blend": 0.1763
+            },
+            "outcome": "opponent_win",
+            "outcome_probabilities": {
+              "laya_win": 0.3368,
+              "draw": 0.1366,
+              "opponent_win": 0.5266
+            },
+            "inference_seconds": 4.556,
+            "input_tokens": 821,
+            "truncated": false
+          },
+          "actual_outcome_class": "opponent_win",
+          "outcome_forecast_correct": true,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 15,
+            "accepted": 15,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261092,
+          "laya_start": 0,
+          "opponent_start": 150,
+          "ticks": 22,
+          "laya": 0,
+          "opponent": 2,
+          "outcome": "opponent-win",
+          "strict_cycle_steps": 21,
+          "strict_cycle_degree": 0.954545,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.5658,
+              "joint": 0.2567,
+              "blend": 0.1775
+            },
+            "outcome": "opponent_win",
+            "outcome_probabilities": {
+              "laya_win": 0.3352,
+              "draw": 0.127,
+              "opponent_win": 0.5378
+            },
+            "inference_seconds": 4.5741,
+            "input_tokens": 821,
+            "truncated": false
+          },
+          "actual_outcome_class": "opponent_win",
+          "outcome_forecast_correct": true,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 21,
+            "accepted": 21,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261093,
+          "laya_start": 150,
+          "opponent_start": 0,
+          "ticks": 65,
+          "laya": 0,
+          "opponent": 4,
+          "outcome": "opponent-win",
+          "strict_cycle_steps": 64,
+          "strict_cycle_degree": 0.984615,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.5646,
+              "joint": 0.2577,
+              "blend": 0.1777
+            },
+            "outcome": "opponent_win",
+            "outcome_probabilities": {
+              "laya_win": 0.3417,
+              "draw": 0.1371,
+              "opponent_win": 0.5212
+            },
+            "inference_seconds": 4.6433,
+            "input_tokens": 821,
+            "truncated": false
+          },
+          "actual_outcome_class": "opponent_win",
+          "outcome_forecast_correct": true,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 64,
+            "accepted": 64,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261094,
+          "laya_start": 0,
+          "opponent_start": 150,
+          "ticks": 90,
+          "laya": 2,
+          "opponent": 5,
+          "outcome": "opponent-win",
+          "strict_cycle_steps": 89,
+          "strict_cycle_degree": 0.988889,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.5658,
+              "joint": 0.257,
+              "blend": 0.1771
+            },
+            "outcome": "opponent_win",
+            "outcome_probabilities": {
+              "laya_win": 0.3392,
+              "draw": 0.128,
+              "opponent_win": 0.5327
+            },
+            "inference_seconds": 4.8043,
+            "input_tokens": 821,
+            "truncated": false
+          },
+          "actual_outcome_class": "opponent_win",
+          "outcome_forecast_correct": true,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 90,
+            "accepted": 90,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        }
+      ],
+      "forecast_after_residual_update": {
+        "laya_wins": 0.125,
+        "draws": 1.125
+      },
+      "model_id": "convaiinnovations/laya",
+      "strategy_update": {
+        "cycle_bias_before": 239,
+        "cycle_bias_after": 278,
+        "accepted": true
+      }
+    },
+    {
+      "cycle": 4,
+      "seed_start": 20261095,
+      "seed_end": 20261099,
+      "forecast": {
+        "laya_wins": 0.125,
+        "draws": 1.125,
+        "opponent_wins": 3.75
+      },
+      "actual": {
+        "laya_wins": 0,
+        "draws": 2,
+        "opponent_wins": 3
+      },
+      "forecast_errors": {
+        "absolute_win_count_error": 0.125,
+        "absolute_draw_count_error": 0.875,
+        "per_match_accuracy": 0.0
+      },
+      "residuals": {
+        "win_count": -0.125,
+        "draw_count": 0.875
+      },
+      "metrics": {
+        "games": 5,
+        "laya_points": 1.0,
+        "opponent_points": 4.0,
+        "point_gap_per_game": 0.6,
+        "laya_food": 1,
+        "opponent_food": 41,
+        "food_gap_ratio": 0.9524,
+        "legal_action_rate": 1.0,
+        "rejected_proposals": 0,
+        "strict_cycle_degree": 0.9904
+      },
+      "invariants_passed": true,
+      "policy_update_accepted": true,
+      "balance_met": false,
+      "safety_met": true,
+      "dual_standard_met": false,
+      "matches": [
+        {
+          "seed": 20261095,
+          "laya_start": 0,
+          "opponent_start": 150,
+          "ticks": 110,
+          "laya": 0,
+          "opponent": 11,
+          "outcome": "draw:head-conflict",
+          "strict_cycle_steps": 109,
+          "strict_cycle_degree": 0.990909,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.5835,
+              "joint": 0.2464,
+              "blend": 0.1701
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.4345,
+              "draw": 0.2031,
+              "opponent_win": 0.3624
+            },
+            "inference_seconds": 4.6505,
+            "input_tokens": 821,
+            "truncated": false
+          },
+          "actual_outcome_class": "draw",
+          "outcome_forecast_correct": false,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 110,
+            "accepted": 110,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261096,
+          "laya_start": 150,
+          "opponent_start": 0,
+          "ticks": 103,
+          "laya": 1,
+          "opponent": 9,
+          "outcome": "draw:head-conflict",
+          "strict_cycle_steps": 102,
+          "strict_cycle_degree": 0.990291,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.5791,
+              "joint": 0.2501,
+              "blend": 0.1708
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.4114,
+              "draw": 0.213,
+              "opponent_win": 0.3756
+            },
+            "inference_seconds": 4.6715,
+            "input_tokens": 821,
+            "truncated": false
+          },
+          "actual_outcome_class": "draw",
+          "outcome_forecast_correct": false,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 103,
+            "accepted": 103,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261097,
+          "laya_start": 0,
+          "opponent_start": 150,
+          "ticks": 63,
+          "laya": 0,
+          "opponent": 4,
+          "outcome": "opponent-win",
+          "strict_cycle_steps": 62,
+          "strict_cycle_degree": 0.984127,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.5828,
+              "joint": 0.2477,
+              "blend": 0.1694
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.4213,
+              "draw": 0.2073,
+              "opponent_win": 0.3714
+            },
+            "inference_seconds": 4.5589,
+            "input_tokens": 821,
+            "truncated": false
+          },
+          "actual_outcome_class": "opponent_win",
+          "outcome_forecast_correct": false,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 62,
+            "accepted": 62,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261098,
+          "laya_start": 150,
+          "opponent_start": 0,
+          "ticks": 81,
+          "laya": 0,
+          "opponent": 6,
+          "outcome": "opponent-win",
+          "strict_cycle_steps": 80,
+          "strict_cycle_degree": 0.987654,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.5775,
+              "joint": 0.2503,
+              "blend": 0.1722
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.4181,
+              "draw": 0.21,
+              "opponent_win": 0.3719
+            },
+            "inference_seconds": 4.5535,
+            "input_tokens": 821,
+            "truncated": false
+          },
+          "actual_outcome_class": "opponent_win",
+          "outcome_forecast_correct": false,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 80,
+            "accepted": 80,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261099,
+          "laya_start": 0,
+          "opponent_start": 150,
+          "ticks": 165,
+          "laya": 0,
+          "opponent": 11,
+          "outcome": "opponent-win",
+          "strict_cycle_steps": 164,
+          "strict_cycle_degree": 0.993939,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.5844,
+              "joint": 0.2467,
+              "blend": 0.1689
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.4299,
+              "draw": 0.2027,
+              "opponent_win": 0.3674
+            },
+            "inference_seconds": 4.633,
+            "input_tokens": 821,
+            "truncated": false
+          },
+          "actual_outcome_class": "opponent_win",
+          "outcome_forecast_correct": false,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 164,
+            "accepted": 164,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        }
+      ],
+      "forecast_after_residual_update": {
+        "laya_wins": 0.0625,
+        "draws": 1.5625
+      },
+      "model_id": "convaiinnovations/laya",
+      "strategy_update": {
+        "cycle_bias_before": 278,
+        "cycle_bias_after": 318,
+        "accepted": true
+      }
+    },
+    {
+      "cycle": 5,
+      "seed_start": 20261100,
+      "seed_end": 20261104,
+      "forecast": {
+        "laya_wins": 0.0625,
+        "draws": 1.5625,
+        "opponent_wins": 3.375
+      },
+      "actual": {
+        "laya_wins": 0,
+        "draws": 2,
+        "opponent_wins": 3
+      },
+      "forecast_errors": {
+        "absolute_win_count_error": 0.0625,
+        "absolute_draw_count_error": 0.4375,
+        "per_match_accuracy": 0.2
+      },
+      "residuals": {
+        "win_count": -0.0625,
+        "draw_count": 0.4375
+      },
+      "metrics": {
+        "games": 5,
+        "laya_points": 1.0,
+        "opponent_points": 4.0,
+        "point_gap_per_game": 0.6,
+        "laya_food": 0,
+        "opponent_food": 24,
+        "food_gap_ratio": 1.0,
+        "legal_action_rate": 1.0,
+        "rejected_proposals": 0,
+        "strict_cycle_degree": 0.9802
+      },
+      "invariants_passed": true,
+      "policy_update_accepted": true,
+      "balance_met": false,
+      "safety_met": true,
+      "dual_standard_met": false,
+      "matches": [
+        {
+          "seed": 20261100,
+          "laya_start": 0,
+          "opponent_start": 150,
+          "ticks": 53,
+          "laya": 0,
+          "opponent": 7,
+          "outcome": "draw:head-conflict",
+          "strict_cycle_steps": 52,
+          "strict_cycle_degree": 0.981132,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.6041,
+              "joint": 0.2367,
+              "blend": 0.1592
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.4239,
+              "draw": 0.1775,
+              "opponent_win": 0.3986
+            },
+            "inference_seconds": 4.6776,
+            "input_tokens": 823,
+            "truncated": false
+          },
+          "actual_outcome_class": "draw",
+          "outcome_forecast_correct": false,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 53,
+            "accepted": 53,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261101,
+          "laya_start": 150,
+          "opponent_start": 0,
+          "ticks": 16,
+          "laya": 0,
+          "opponent": 2,
+          "outcome": "draw:head-conflict",
+          "strict_cycle_steps": 15,
+          "strict_cycle_degree": 0.9375,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.5977,
+              "joint": 0.2398,
+              "blend": 0.1625
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.4083,
+              "draw": 0.1868,
+              "opponent_win": 0.4049
+            },
+            "inference_seconds": 4.6724,
+            "input_tokens": 823,
+            "truncated": false
+          },
+          "actual_outcome_class": "draw",
+          "outcome_forecast_correct": false,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 16,
+            "accepted": 16,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261102,
+          "laya_start": 0,
+          "opponent_start": 150,
+          "ticks": 34,
+          "laya": 0,
+          "opponent": 2,
+          "outcome": "opponent-win",
+          "strict_cycle_steps": 33,
+          "strict_cycle_degree": 0.970588,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.5943,
+              "joint": 0.2395,
+              "blend": 0.1662
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.4195,
+              "draw": 0.1908,
+              "opponent_win": 0.3897
+            },
+            "inference_seconds": 4.6205,
+            "input_tokens": 825,
+            "truncated": false
+          },
+          "actual_outcome_class": "opponent_win",
+          "outcome_forecast_correct": false,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 33,
+            "accepted": 33,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261103,
+          "laya_start": 150,
+          "opponent_start": 0,
+          "ticks": 84,
+          "laya": 0,
+          "opponent": 8,
+          "outcome": "opponent-win",
+          "strict_cycle_steps": 83,
+          "strict_cycle_degree": 0.988095,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.5966,
+              "joint": 0.2402,
+              "blend": 0.1632
+            },
+            "outcome": "opponent_win",
+            "outcome_probabilities": {
+              "laya_win": 0.4046,
+              "draw": 0.1872,
+              "opponent_win": 0.4082
+            },
+            "inference_seconds": 4.5089,
+            "input_tokens": 823,
+            "truncated": false
+          },
+          "actual_outcome_class": "opponent_win",
+          "outcome_forecast_correct": true,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 83,
+            "accepted": 83,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261104,
+          "laya_start": 0,
+          "opponent_start": 150,
+          "ticks": 65,
+          "laya": 0,
+          "opponent": 5,
+          "outcome": "opponent-win",
+          "strict_cycle_steps": 64,
+          "strict_cycle_degree": 0.984615,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.5958,
+              "joint": 0.2382,
+              "blend": 0.1661
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.4226,
+              "draw": 0.1898,
+              "opponent_win": 0.3876
+            },
+            "inference_seconds": 4.5134,
+            "input_tokens": 825,
+            "truncated": false
+          },
+          "actual_outcome_class": "opponent_win",
+          "outcome_forecast_correct": false,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 64,
+            "accepted": 64,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        }
+      ],
+      "forecast_after_residual_update": {
+        "laya_wins": 0.03125,
+        "draws": 1.78125
+      },
+      "model_id": "convaiinnovations/laya",
+      "strategy_update": {
+        "cycle_bias_before": 318,
+        "cycle_bias_after": 357,
+        "accepted": true
+      }
+    },
+    {
+      "cycle": 6,
+      "seed_start": 20261105,
+      "seed_end": 20261109,
+      "forecast": {
+        "laya_wins": 0.03125,
+        "draws": 1.78125,
+        "opponent_wins": 3.1875
+      },
+      "actual": {
+        "laya_wins": 0,
+        "draws": 1,
+        "opponent_wins": 4
+      },
+      "forecast_errors": {
+        "absolute_win_count_error": 0.03125,
+        "absolute_draw_count_error": 0.78125,
+        "per_match_accuracy": 0.0
+      },
+      "residuals": {
+        "win_count": -0.03125,
+        "draw_count": -0.78125
+      },
+      "metrics": {
+        "games": 5,
+        "laya_points": 0.5,
+        "opponent_points": 4.5,
+        "point_gap_per_game": 0.8,
+        "laya_food": 1,
+        "opponent_food": 36,
+        "food_gap_ratio": 0.9459,
+        "legal_action_rate": 1.0,
+        "rejected_proposals": 0,
+        "strict_cycle_degree": 0.988
+      },
+      "invariants_passed": true,
+      "policy_update_accepted": true,
+      "balance_met": false,
+      "safety_met": true,
+      "dual_standard_met": false,
+      "matches": [
+        {
+          "seed": 20261105,
+          "laya_start": 0,
+          "opponent_start": 150,
+          "ticks": 85,
+          "laya": 0,
+          "opponent": 8,
+          "outcome": "opponent-win",
+          "strict_cycle_steps": 84,
+          "strict_cycle_degree": 0.988235,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.6142,
+              "joint": 0.2285,
+              "blend": 0.1573
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.5139,
+              "draw": 0.1889,
+              "opponent_win": 0.2972
+            },
+            "inference_seconds": 4.6247,
+            "input_tokens": 825,
+            "truncated": false
+          },
+          "actual_outcome_class": "opponent_win",
+          "outcome_forecast_correct": false,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 84,
+            "accepted": 84,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261106,
+          "laya_start": 150,
+          "opponent_start": 0,
+          "ticks": 205,
+          "laya": 0,
+          "opponent": 19,
+          "outcome": "opponent-win",
+          "strict_cycle_steps": 204,
+          "strict_cycle_degree": 0.995122,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.6179,
+              "joint": 0.2255,
+              "blend": 0.1566
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.514,
+              "draw": 0.1943,
+              "opponent_win": 0.2917
+            },
+            "inference_seconds": 4.6026,
+            "input_tokens": 825,
+            "truncated": false
+          },
+          "actual_outcome_class": "opponent_win",
+          "outcome_forecast_correct": false,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 204,
+            "accepted": 204,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261107,
+          "laya_start": 0,
+          "opponent_start": 150,
+          "ticks": 53,
+          "laya": 0,
+          "opponent": 4,
+          "outcome": "opponent-win",
+          "strict_cycle_steps": 52,
+          "strict_cycle_degree": 0.981132,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.6133,
+              "joint": 0.229,
+              "blend": 0.1577
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.5167,
+              "draw": 0.1882,
+              "opponent_win": 0.2951
+            },
+            "inference_seconds": 4.7043,
+            "input_tokens": 825,
+            "truncated": false
+          },
+          "actual_outcome_class": "opponent_win",
+          "outcome_forecast_correct": false,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 52,
+            "accepted": 52,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261108,
+          "laya_start": 150,
+          "opponent_start": 0,
+          "ticks": 58,
+          "laya": 1,
+          "opponent": 4,
+          "outcome": "opponent-win",
+          "strict_cycle_steps": 57,
+          "strict_cycle_degree": 0.982759,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.615,
+              "joint": 0.2278,
+              "blend": 0.1572
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.5169,
+              "draw": 0.1935,
+              "opponent_win": 0.2895
+            },
+            "inference_seconds": 4.6332,
+            "input_tokens": 825,
+            "truncated": false
+          },
+          "actual_outcome_class": "opponent_win",
+          "outcome_forecast_correct": false,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 57,
+            "accepted": 57,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261109,
+          "laya_start": 0,
+          "opponent_start": 150,
+          "ticks": 17,
+          "laya": 0,
+          "opponent": 1,
+          "outcome": "draw:head-conflict",
+          "strict_cycle_steps": 16,
+          "strict_cycle_degree": 0.941176,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.6144,
+              "joint": 0.2279,
+              "blend": 0.1577
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.5191,
+              "draw": 0.1864,
+              "opponent_win": 0.2945
+            },
+            "inference_seconds": 4.6077,
+            "input_tokens": 825,
+            "truncated": false
+          },
+          "actual_outcome_class": "draw",
+          "outcome_forecast_correct": false,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 17,
+            "accepted": 17,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        }
+      ],
+      "forecast_after_residual_update": {
+        "laya_wins": 0.015625,
+        "draws": 1.390625
+      },
+      "model_id": "convaiinnovations/laya",
+      "strategy_update": {
+        "cycle_bias_before": 357,
+        "cycle_bias_after": 397,
+        "accepted": true
+      }
+    },
+    {
+      "cycle": 7,
+      "seed_start": 20261110,
+      "seed_end": 20261114,
+      "forecast": {
+        "laya_wins": 0.015625,
+        "draws": 1.390625,
+        "opponent_wins": 3.59375
+      },
+      "actual": {
+        "laya_wins": 0,
+        "draws": 2,
+        "opponent_wins": 3
+      },
+      "forecast_errors": {
+        "absolute_win_count_error": 0.015625,
+        "absolute_draw_count_error": 0.609375,
+        "per_match_accuracy": 0.0
+      },
+      "residuals": {
+        "win_count": -0.015625,
+        "draw_count": 0.609375
+      },
+      "metrics": {
+        "games": 5,
+        "laya_points": 1.0,
+        "opponent_points": 4.0,
+        "point_gap_per_game": 0.6,
+        "laya_food": 3,
+        "opponent_food": 48,
+        "food_gap_ratio": 0.8824,
+        "legal_action_rate": 1.0,
+        "rejected_proposals": 0,
+        "strict_cycle_degree": 0.9925
+      },
+      "invariants_passed": true,
+      "policy_update_accepted": true,
+      "balance_met": false,
+      "safety_met": true,
+      "dual_standard_met": false,
+      "matches": [
+        {
+          "seed": 20261110,
+          "laya_start": 0,
+          "opponent_start": 150,
+          "ticks": 89,
+          "laya": 0,
+          "opponent": 7,
+          "outcome": "opponent-win",
+          "strict_cycle_steps": 88,
+          "strict_cycle_degree": 0.988764,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.6076,
+              "joint": 0.2313,
+              "blend": 0.1611
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.425,
+              "draw": 0.202,
+              "opponent_win": 0.3729
+            },
+            "inference_seconds": 4.6339,
+            "input_tokens": 829,
+            "truncated": false
+          },
+          "actual_outcome_class": "opponent_win",
+          "outcome_forecast_correct": false,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 88,
+            "accepted": 88,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261111,
+          "laya_start": 150,
+          "opponent_start": 0,
+          "ticks": 235,
+          "laya": 2,
+          "opponent": 17,
+          "outcome": "opponent-win",
+          "strict_cycle_steps": 234,
+          "strict_cycle_degree": 0.995745,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.5974,
+              "joint": 0.2401,
+              "blend": 0.1625
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.4069,
+              "draw": 0.2008,
+              "opponent_win": 0.3923
+            },
+            "inference_seconds": 4.5825,
+            "input_tokens": 827,
+            "truncated": false
+          },
+          "actual_outcome_class": "opponent_win",
+          "outcome_forecast_correct": false,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 234,
+            "accepted": 234,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261112,
+          "laya_start": 0,
+          "opponent_start": 150,
+          "ticks": 168,
+          "laya": 0,
+          "opponent": 13,
+          "outcome": "opponent-win",
+          "strict_cycle_steps": 167,
+          "strict_cycle_degree": 0.994048,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.6062,
+              "joint": 0.2327,
+              "blend": 0.1611
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.4299,
+              "draw": 0.2029,
+              "opponent_win": 0.3671
+            },
+            "inference_seconds": 5.427,
+            "input_tokens": 829,
+            "truncated": false
+          },
+          "actual_outcome_class": "opponent_win",
+          "outcome_forecast_correct": false,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 167,
+            "accepted": 167,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261113,
+          "laya_start": 150,
+          "opponent_start": 0,
+          "ticks": 108,
+          "laya": 1,
+          "opponent": 6,
+          "outcome": "draw:head-conflict",
+          "strict_cycle_steps": 107,
+          "strict_cycle_degree": 0.990741,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.6065,
+              "joint": 0.2317,
+              "blend": 0.1618
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.4099,
+              "draw": 0.2129,
+              "opponent_win": 0.3772
+            },
+            "inference_seconds": 4.6574,
+            "input_tokens": 829,
+            "truncated": false
+          },
+          "actual_outcome_class": "draw",
+          "outcome_forecast_correct": false,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 108,
+            "accepted": 108,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261114,
+          "laya_start": 0,
+          "opponent_start": 150,
+          "ticks": 65,
+          "laya": 0,
+          "opponent": 5,
+          "outcome": "draw:head-conflict",
+          "strict_cycle_steps": 64,
+          "strict_cycle_degree": 0.984615,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.6046,
+              "joint": 0.233,
+              "blend": 0.1623
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.424,
+              "draw": 0.2038,
+              "opponent_win": 0.3722
+            },
+            "inference_seconds": 4.7512,
+            "input_tokens": 829,
+            "truncated": false
+          },
+          "actual_outcome_class": "draw",
+          "outcome_forecast_correct": false,
+          "controller": "cycle",
+          "hard_filter": {
+            "recommendations": 65,
+            "accepted": 65,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        }
+      ],
+      "forecast_after_residual_update": {
+        "laya_wins": 0.0078125,
+        "draws": 1.6953125
+      },
+      "model_id": "convaiinnovations/laya",
+      "strategy_update": {
+        "cycle_bias_before": 397,
+        "cycle_bias_after": 437,
+        "accepted": true
+      }
+    },
+    {
+      "cycle": 8,
+      "seed_start": 20261115,
+      "seed_end": 20261119,
+      "forecast": {
+        "laya_wins": 0.0078125,
+        "draws": 1.6953125,
+        "opponent_wins": 3.296875
+      },
+      "actual": {
+        "laya_wins": 0,
+        "draws": 5,
+        "opponent_wins": 0
+      },
+      "forecast_errors": {
+        "absolute_win_count_error": 0.0078125,
+        "absolute_draw_count_error": 3.3046875,
+        "per_match_accuracy": 0.0
+      },
+      "residuals": {
+        "win_count": -0.0078125,
+        "draw_count": 3.3046875
+      },
+      "metrics": {
+        "games": 5,
+        "laya_points": 2.5,
+        "opponent_points": 2.5,
+        "point_gap_per_game": 0.0,
+        "laya_food": 17,
+        "opponent_food": 17,
+        "food_gap_ratio": 0.0,
+        "legal_action_rate": 1.0,
+        "rejected_proposals": 0,
+        "strict_cycle_degree": 0.0721
+      },
+      "invariants_passed": true,
+      "policy_update_accepted": false,
+      "balance_met": true,
+      "safety_met": false,
+      "dual_standard_met": false,
+      "matches": [
+        {
+          "seed": 20261115,
+          "laya_start": 0,
+          "opponent_start": 150,
+          "ticks": 20,
+          "laya": 0,
+          "opponent": 1,
+          "outcome": "draw:head-conflict",
+          "strict_cycle_steps": 4,
+          "strict_cycle_degree": 0.2,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.4963,
+              "joint": 0.172,
+              "blend": 0.1638,
+              "mirror": 0.1678
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.4474,
+              "draw": 0.2035,
+              "opponent_win": 0.349
+            },
+            "inference_seconds": 6.0717,
+            "input_tokens": 900,
+            "truncated": false,
+            "model_proposed_controller": "cycle",
+            "controller_override": "previous_batch_outside_balance_tolerance"
+          },
+          "actual_outcome_class": "draw",
+          "outcome_forecast_correct": false,
+          "controller": "mirror",
+          "hard_filter": {
+            "recommendations": 20,
+            "accepted": 20,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261116,
+          "laya_start": 150,
+          "opponent_start": 0,
+          "ticks": 144,
+          "laya": 8,
+          "opponent": 4,
+          "outcome": "draw:head-conflict",
+          "strict_cycle_steps": 3,
+          "strict_cycle_degree": 0.020833,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.4884,
+              "joint": 0.173,
+              "blend": 0.1663,
+              "mirror": 0.1723
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.4316,
+              "draw": 0.2138,
+              "opponent_win": 0.3546
+            },
+            "inference_seconds": 5.391,
+            "input_tokens": 900,
+            "truncated": false,
+            "model_proposed_controller": "cycle",
+            "controller_override": "previous_batch_outside_balance_tolerance"
+          },
+          "actual_outcome_class": "draw",
+          "outcome_forecast_correct": false,
+          "controller": "mirror",
+          "hard_filter": {
+            "recommendations": 144,
+            "accepted": 144,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261117,
+          "laya_start": 0,
+          "opponent_start": 150,
+          "ticks": 38,
+          "laya": 2,
+          "opponent": 1,
+          "outcome": "draw:head-conflict",
+          "strict_cycle_steps": 9,
+          "strict_cycle_degree": 0.236842,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.49,
+              "joint": 0.1734,
+              "blend": 0.1657,
+              "mirror": 0.1708
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.4446,
+              "draw": 0.2073,
+              "opponent_win": 0.3481
+            },
+            "inference_seconds": 5.5726,
+            "input_tokens": 900,
+            "truncated": false,
+            "model_proposed_controller": "cycle",
+            "controller_override": "previous_batch_outside_balance_tolerance"
+          },
+          "actual_outcome_class": "draw",
+          "outcome_forecast_correct": false,
+          "controller": "mirror",
+          "hard_filter": {
+            "recommendations": 38,
+            "accepted": 38,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261118,
+          "laya_start": 150,
+          "opponent_start": 0,
+          "ticks": 77,
+          "laya": 3,
+          "opponent": 6,
+          "outcome": "draw:head-conflict",
+          "strict_cycle_steps": 10,
+          "strict_cycle_degree": 0.12987,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.4879,
+              "joint": 0.1731,
+              "blend": 0.1668,
+              "mirror": 0.1722
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.4295,
+              "draw": 0.2178,
+              "opponent_win": 0.3527
+            },
+            "inference_seconds": 5.3329,
+            "input_tokens": 900,
+            "truncated": false,
+            "model_proposed_controller": "cycle",
+            "controller_override": "previous_batch_outside_balance_tolerance"
+          },
+          "actual_outcome_class": "draw",
+          "outcome_forecast_correct": false,
+          "controller": "mirror",
+          "hard_filter": {
+            "recommendations": 77,
+            "accepted": 77,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261119,
+          "laya_start": 0,
+          "opponent_start": 150,
+          "ticks": 123,
+          "laya": 4,
+          "opponent": 5,
+          "outcome": "draw:head-conflict",
+          "strict_cycle_steps": 3,
+          "strict_cycle_degree": 0.02439,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.4905,
+              "joint": 0.1734,
+              "blend": 0.1658,
+              "mirror": 0.1703
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.4436,
+              "draw": 0.2087,
+              "opponent_win": 0.3477
+            },
+            "inference_seconds": 5.5532,
+            "input_tokens": 900,
+            "truncated": false,
+            "model_proposed_controller": "cycle",
+            "controller_override": "previous_batch_outside_balance_tolerance"
+          },
+          "actual_outcome_class": "draw",
+          "outcome_forecast_correct": false,
+          "controller": "mirror",
+          "hard_filter": {
+            "recommendations": 123,
+            "accepted": 123,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        }
+      ],
+      "forecast_after_residual_update": {
+        "laya_wins": 0.00390625,
+        "draws": 3.34765625
+      },
+      "model_id": "convaiinnovations/laya",
+      "strategy_update": {
+        "cycle_bias_before": 437,
+        "cycle_bias_after": 437,
+        "accepted": false
+      }
+    },
+    {
+      "cycle": 9,
+      "seed_start": 20261120,
+      "seed_end": 20261124,
+      "forecast": {
+        "laya_wins": 0.00390625,
+        "draws": 3.34765625,
+        "opponent_wins": 1.6484375
+      },
+      "actual": {
+        "laya_wins": 0,
+        "draws": 5,
+        "opponent_wins": 0
+      },
+      "forecast_errors": {
+        "absolute_win_count_error": 0.00390625,
+        "absolute_draw_count_error": 1.65234375,
+        "per_match_accuracy": 0.0
+      },
+      "residuals": {
+        "win_count": -0.00390625,
+        "draw_count": 1.65234375
+      },
+      "metrics": {
+        "games": 5,
+        "laya_points": 2.5,
+        "opponent_points": 2.5,
+        "point_gap_per_game": 0.0,
+        "laya_food": 61,
+        "opponent_food": 64,
+        "food_gap_ratio": 0.024,
+        "legal_action_rate": 1.0,
+        "rejected_proposals": 0,
+        "strict_cycle_degree": 1.0
+      },
+      "invariants_passed": true,
+      "policy_update_accepted": true,
+      "balance_met": true,
+      "safety_met": true,
+      "dual_standard_met": true,
+      "matches": [
+        {
+          "seed": 20261120,
+          "laya_start": 0,
+          "opponent_start": 150,
+          "ticks": 1800,
+          "laya": 8,
+          "opponent": 15,
+          "outcome": "draw:tick-cap",
+          "strict_cycle_steps": 1800,
+          "strict_cycle_degree": 1.0,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.3215,
+              "joint": 0.1304,
+              "blend": 0.1228,
+              "mirror": 0.1656,
+              "cycle_pair": 0.2598
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.4404,
+              "draw": 0.1356,
+              "opponent_win": 0.424
+            },
+            "inference_seconds": 5.8249,
+            "input_tokens": 914,
+            "truncated": true,
+            "model_proposed_controller": "cycle",
+            "controller_override": "previous_batch_missed_balance_or_full_cycle_safety"
+          },
+          "actual_outcome_class": "draw",
+          "outcome_forecast_correct": false,
+          "controller": "cycle_pair",
+          "hard_filter": {
+            "laya": {
+              "recommendations": 1800,
+              "accepted": 1800,
+              "rejected": 0,
+              "fallbacks": 0
+            },
+            "opponent": {
+              "recommendations": 1800,
+              "accepted": 1800,
+              "rejected": 0,
+              "fallbacks": 0
+            },
+            "recommendations": 3600,
+            "accepted": 3600,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261121,
+          "laya_start": 150,
+          "opponent_start": 0,
+          "ticks": 1800,
+          "laya": 15,
+          "opponent": 8,
+          "outcome": "draw:tick-cap",
+          "strict_cycle_steps": 1800,
+          "strict_cycle_degree": 1.0,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.3169,
+              "joint": 0.126,
+              "blend": 0.1194,
+              "mirror": 0.1739,
+              "cycle_pair": 0.2638
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.4565,
+              "draw": 0.1485,
+              "opponent_win": 0.395
+            },
+            "inference_seconds": 5.5421,
+            "input_tokens": 915,
+            "truncated": true,
+            "model_proposed_controller": "cycle",
+            "controller_override": "previous_batch_missed_balance_or_full_cycle_safety"
+          },
+          "actual_outcome_class": "draw",
+          "outcome_forecast_correct": false,
+          "controller": "cycle_pair",
+          "hard_filter": {
+            "laya": {
+              "recommendations": 1800,
+              "accepted": 1800,
+              "rejected": 0,
+              "fallbacks": 0
+            },
+            "opponent": {
+              "recommendations": 1800,
+              "accepted": 1800,
+              "rejected": 0,
+              "fallbacks": 0
+            },
+            "recommendations": 3600,
+            "accepted": 3600,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261122,
+          "laya_start": 0,
+          "opponent_start": 150,
+          "ticks": 1800,
+          "laya": 13,
+          "opponent": 10,
+          "outcome": "draw:tick-cap",
+          "strict_cycle_steps": 1800,
+          "strict_cycle_degree": 1.0,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.3215,
+              "joint": 0.128,
+              "blend": 0.1197,
+              "mirror": 0.1693,
+              "cycle_pair": 0.2616
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.4538,
+              "draw": 0.1435,
+              "opponent_win": 0.4027
+            },
+            "inference_seconds": 5.7668,
+            "input_tokens": 915,
+            "truncated": true,
+            "model_proposed_controller": "cycle",
+            "controller_override": "previous_batch_missed_balance_or_full_cycle_safety"
+          },
+          "actual_outcome_class": "draw",
+          "outcome_forecast_correct": false,
+          "controller": "cycle_pair",
+          "hard_filter": {
+            "laya": {
+              "recommendations": 1800,
+              "accepted": 1800,
+              "rejected": 0,
+              "fallbacks": 0
+            },
+            "opponent": {
+              "recommendations": 1800,
+              "accepted": 1800,
+              "rejected": 0,
+              "fallbacks": 0
+            },
+            "recommendations": 3600,
+            "accepted": 3600,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261123,
+          "laya_start": 150,
+          "opponent_start": 0,
+          "ticks": 1800,
+          "laya": 16,
+          "opponent": 12,
+          "outcome": "draw:tick-cap",
+          "strict_cycle_steps": 1800,
+          "strict_cycle_degree": 1.0,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.3243,
+              "joint": 0.1283,
+              "blend": 0.1212,
+              "mirror": 0.1639,
+              "cycle_pair": 0.2622
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.442,
+              "draw": 0.1389,
+              "opponent_win": 0.4192
+            },
+            "inference_seconds": 5.6121,
+            "input_tokens": 914,
+            "truncated": true,
+            "model_proposed_controller": "cycle",
+            "controller_override": "previous_batch_missed_balance_or_full_cycle_safety"
+          },
+          "actual_outcome_class": "draw",
+          "outcome_forecast_correct": false,
+          "controller": "cycle_pair",
+          "hard_filter": {
+            "laya": {
+              "recommendations": 1800,
+              "accepted": 1800,
+              "rejected": 0,
+              "fallbacks": 0
+            },
+            "opponent": {
+              "recommendations": 1800,
+              "accepted": 1800,
+              "rejected": 0,
+              "fallbacks": 0
+            },
+            "recommendations": 3600,
+            "accepted": 3600,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        },
+        {
+          "seed": 20261124,
+          "laya_start": 0,
+          "opponent_start": 150,
+          "ticks": 1800,
+          "laya": 9,
+          "opponent": 19,
+          "outcome": "draw:tick-cap",
+          "strict_cycle_steps": 1800,
+          "strict_cycle_degree": 1.0,
+          "model_decision": {
+            "controller": "cycle",
+            "controller_probabilities": {
+              "cycle": 0.3218,
+              "joint": 0.1274,
+              "blend": 0.1202,
+              "mirror": 0.1703,
+              "cycle_pair": 0.2603
+            },
+            "outcome": "laya_win",
+            "outcome_probabilities": {
+              "laya_win": 0.4562,
+              "draw": 0.1414,
+              "opponent_win": 0.4024
+            },
+            "inference_seconds": 5.6982,
+            "input_tokens": 915,
+            "truncated": true,
+            "model_proposed_controller": "cycle",
+            "controller_override": "previous_batch_missed_balance_or_full_cycle_safety"
+          },
+          "actual_outcome_class": "draw",
+          "outcome_forecast_correct": false,
+          "controller": "cycle_pair",
+          "hard_filter": {
+            "laya": {
+              "recommendations": 1800,
+              "accepted": 1800,
+              "rejected": 0,
+              "fallbacks": 0
+            },
+            "opponent": {
+              "recommendations": 1800,
+              "accepted": 1800,
+              "rejected": 0,
+              "fallbacks": 0
+            },
+            "recommendations": 3600,
+            "accepted": 3600,
+            "rejected": 0,
+            "fallbacks": 0
+          },
+          "decision_invariants_passed": true
+        }
+      ],
+      "forecast_after_residual_update": {
+        "laya_wins": 0.001953125,
+        "draws": 4.173828125
+      },
+      "model_id": "convaiinnovations/laya",
+      "strategy_update": {
+        "cycle_bias_before": 437,
+        "cycle_bias_after": 477,
+        "accepted": true
+      }
+    }
+  ],
+  "forecast_summary": {
+    "metric": "Laya pre-match outcome choice vs actual batch counts",
+    "win_count_mae": 0.2218,
+    "draw_count_mae": 1.3789,
+    "per_match_accuracy": 0.1778,
+    "residual_alpha": 0.5,
+    "next_forecast": {
+      "laya_wins": 0.001953125,
+      "draws": 4.173828125
+    }
+  },
+  "safety_rate": 1.0,
+  "conclusion": "第 9 轮同时满足预设平衡与安全阈值；仅对本评测种子和对局规则成立。逐局原始预测准确率偏低，不代表预测已校准。",
+  "legal_action_rate": 1.0,
+  "strategy_update_acceptance_note": "Only cycles with 100% legal-action rate, zero rejected proposals, and strict full-cycle retention >= 95% accept strategy updates.",
+  "total_games": 45,
+  "total_outcomes": {
+    "laya_wins": 0,
+    "draws": 21,
+    "opponent_wins": 24
+  },
+  "model_cycle_strategy": "Laya chose a controller and predicted the result before each game; per-move actions then passed local legal-action filtering. Residual gates overrode the unbalanced mode in later cycles."
+}
