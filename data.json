@@ -2359,5 +2359,33 @@
     "draws": 21,
     "opponent_wins": 24
   },
-  "model_cycle_strategy": "Laya chose a controller and predicted the result before each game; per-move actions then passed local legal-action filtering. Residual gates overrode the unbalanced mode in later cycles."
+  "model_cycle_strategy": "Laya chose a controller and predicted the result before each game; per-move actions then passed local legal-action filtering. Residual gates overrode the unbalanced mode in later cycles.",
+  "agents": [
+    {
+      "id": "laya_strategy",
+      "implementation": "Open-source Laya checkpoint; typed controller/outcome choices",
+      "role": "策略提议"
+    },
+    {
+      "id": "search_opponent",
+      "implementation": "One-ply BFS + reachable-space scoring; cycle opponent for paired runs",
+      "role": "对手策略"
+    },
+    {
+      "id": "safety_guardian",
+      "implementation": "Legal non-reverse action filter with safe fallback; rejects illegal proposals",
+      "role": "安全守卫"
+    },
+    {
+      "id": "balance_residual",
+      "implementation": "Checks balance/safety thresholds and gates overrides; alpha=0.5 residual update",
+      "role": "平衡与残差校准"
+    },
+    {
+      "id": "audit_recorder",
+      "implementation": "Persists forecasts, outcomes, invariants, errors, and accepted updates per seed",
+      "role": "记录审计"
+    }
+  ],
+  "market_data_status": "Binance public klines endpoint returned transport error on 2026-10-02; no fresh market figures inferred."
 }
