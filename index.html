@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a1020">
+  <title>Laya 循环实验台</title>
+  <style>
+    :root{color-scheme:dark;--bg:#080d19;--panel:#111a2b;--panel2:#0d1524;--line:#26354d;--ink:#edf3ff;--muted:#9aabc5;--cyan:#70e0dc;--blue:#8db8ff;--amber:#ffd27b;--green:#8be0a5;--red:#ff9c9c}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 15% -10%,#183653 0,transparent 44%),var(--bg);color:var(--ink);font:15px/1.6 ui-sans-serif,system-ui,"Segoe UI",sans-serif}
+    main{width:min(1120px,calc(100% - 32px));margin:0 auto;padding:42px 0 64px}.top{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}.eyebrow{letter-spacing:.13em;text-transform:uppercase;color:var(--cyan);font-size:12px;font-weight:700}h1{font-size:clamp(30px,5vw,50px);line-height:1.08;letter-spacing:-.04em;margin:9px 0 12px}.sub{margin:0;color:var(--muted);max-width:680px}.badge{white-space:nowrap;border:1px solid var(--line);border-radius:999px;padding:8px 12px;color:var(--amber);background:#241e12;font-size:13px}
+    .loop{display:flex;flex-wrap:wrap;gap:8px;margin:30px 0}.loop span{padding:8px 12px;border-radius:9px;background:#142234;border:1px solid #253a51;color:#c9d8ed}.loop b{color:var(--cyan);font-weight:600}
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.card,.panel{background:linear-gradient(155deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:15px}.card{padding:18px}.label{font-size:12px;color:var(--muted)}.value{font-size:27px;font-weight:700;letter-spacing:-.03em;margin-top:4px}.hint{font-size:12px;color:var(--muted);margin-top:2px}
+    .panel{padding:22px;margin-top:14px}.panel h2{font-size:17px;margin:0 0 14px}.twocol{display:grid;grid-template-columns:1fr 1fr;gap:14px}.kv{display:flex;justify-content:space-between;gap:18px;padding:10px 0;border-bottom:1px solid #202d42}.kv:last-child{border-bottom:0}.kv span:first-child{color:var(--muted)}.kv span:last-child{text-align:right;overflow-wrap:anywhere}
+    .callout{padding:14px 16px;border-radius:11px;background:#211b11;border:1px solid #594624;color:#ffe0a8}.good{background:#102118;border-color:#28573d;color:#c1f4d0}.bad{background:#291719;border-color:#693437;color:#ffd0d0}.tablewrap{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:680px}th,td{text-align:left;padding:11px 10px;border-bottom:1px solid #202d42}th{font-size:12px;color:var(--muted);font-weight:600}td{font-variant-numeric:tabular-nums}.pill{display:inline-block;padding:3px 8px;border-radius:99px;background:#1c2b3f;color:#cfdef2;font-size:12px}.links{display:flex;gap:12px;flex-wrap:wrap}.links a{color:var(--cyan);text-decoration:none}.links a:hover{text-decoration:underline}.foot{color:var(--muted);font-size:12px;margin-top:24px}
+    @media(max-width:760px){main{padding-top:28px}.top{display:block}.badge{display:inline-block;margin-top:16px}.grid{grid-template-columns:repeat(2,1fr)}.twocol{grid-template-columns:1fr}.panel{padding:17px}}
+  </style>
+</head>
+<body>
+<main>
+  <div class="top">
+    <div><div class="eyebrow">SAFETY · PREDICTION · RESIDUAL</div><h1>Laya 循环实验台</h1><p class="sub">公开模型接入与小游戏评测记录。每一轮先登记预测，再换新种子运行；硬约束通过后才接受更新。</p></div>
+    <div id="status" class="badge">正在读取实验记录</div>
+  </div>
+  <div class="loop"><span>① <b>安全主元</b></span><span>→</span><span>② <b>赛前预测</b></span><span>→</span><span>③ <b>新种子运行</b></span><span>→</span><span>④ <b>残差校准</b></span><span>→</span><span>⑤ <b>安全门控更新</b></span></div>
+  <section class="grid">
+    <div class="card"><div class="label">真实模型循环</div><div class="value" id="cycles">—</div><div class="hint">只计 Laya 权重推理</div></div>
+    <div class="card"><div class="label">运行状态</div><div class="value" id="runtime">—</div><div class="hint">隔离环境 · CPU</div></div>
+    <div class="card"><div class="label">安全主元</div><div class="value" id="safety">—</div><div class="hint">满盘循环保持 ≥95%；合法动作过滤需 100%</div></div>
+    <div class="card"><div class="label">双标准</div><div class="value" id="dual">—</div><div class="hint">平衡 + 安全同时达标</div></div>
+  </section>
+  <section class="twocol">
+    <div class="panel"><h2>模型与运行环境</h2><div id="modelInfo"></div></div>
+    <div class="panel"><h2>预测校准</h2><div id="forecastInfo"></div></div>
+  </section>
+  <section class="panel"><h2>逐轮记录</h2><div class="tablewrap"><table><thead><tr><th>轮次 / 种子</th><th>控制器</th><th>赛前预测</th><th>实际结果</th><th>残差 / 误差</th><th>安全主元</th><th>策略采纳</th></tr></thead><tbody id="rows"><tr><td colspan="7">等待真实推理记录</td></tr></tbody></table></div></section>
+  <section class="panel"><h2>当前结论</h2><div id="conclusion" class="callout">正在读取最新记录。</div></section>
+  <section class="panel"><h2>来源</h2><div class="links"><a href="https://github.com/NandhaKishorM/laya" target="_blank" rel="noreferrer">官方 SDK（GitHub）</a><a href="https://huggingface.co/convaiinnovations/laya" target="_blank" rel="noreferrer">模型权重（Hugging Face）</a></div><p class="foot">本页只展示已保存的实测数据。启发式基线与真实 Laya 推理分开统计。</p></section>
+</main>
+<script>
+const fallback={repository:{name:'NandhaKishorM/laya',license:'Apache-2.0',sdk_version:'0.3.23'},weights:{model_id:'convaiinnovations/laya',downloaded:false},environment:{python:'3.12.14',venv:'.venv-laya',sdk_install:'succeeded',pytorch:'2.7.1+cpu',pytorch_import:'succeeded'},cycles_completed:0,cycles:[],inference:null,balance_and_safety_stop_condition_met:false,classification:'weights_downloading'};
+const fmt=x=>x===null||x===undefined?'—':typeof x==='number'?Number(x.toFixed(4)).toString():String(x);
+const row=(a,b)=>`<div class="kv"><span>${a}</span><span>${b}</span></div>`;
+function render(d){
+ const env=d.environment||{}, weights=d.weights||{}, repo=d.repository||{}, cycles=d.cycles||[];
+ const done=Number(d.cycles_completed||cycles.length), loaded=!!weights.downloaded&&!!d.inference?.success;
+ const badge=document.querySelector('#status'); badge.textContent=d.balance_and_safety_stop_condition_met?'双标准达成 · 停止':loaded?'模型已加载 · 循环进行中':'准备模型中'; badge.style.color=d.balance_and_safety_stop_condition_met?'var(--green)':loaded?'var(--cyan)':'var(--amber)';
+ document.querySelector('#cycles').textContent=done;
+ document.querySelector('#runtime').textContent=loaded?'已就绪':(env.pytorch_import==='succeeded'?'已就绪':'排查中');
+ document.querySelector('#safety').textContent=d.safety_rate===undefined?'待测':`${fmt(100*d.safety_rate)}%`;
+ document.querySelector('#dual').textContent=d.balance_and_safety_stop_condition_met?'达成':'未达成';
+ document.querySelector('#modelInfo').innerHTML=row('开源实现',repo.name||'—')+row('许可证',repo.license||'—')+row('SDK',repo.sdk_version||'—')+row('公开权重',weights.model_id||'—')+row('Python / PyTorch',`${env.python||'—'} / ${env.pytorch||'—'}`)+row('权重下载',weights.downloaded?'完成':'进行中');
+ const f=d.forecast_summary||{}; document.querySelector('#forecastInfo').innerHTML=row('逐局预测命中率',f.per_match_accuracy===undefined?'等待首轮':`${fmt(100*f.per_match_accuracy)}%`)+row('胜场计数 MAE',fmt(f.win_count_mae))+row('平局计数 MAE',fmt(f.draw_count_mae))+row('残差系数 α',fmt(f.residual_alpha??0.5))+row('当前胜/平预测',`${fmt(f.next_forecast?.laya_wins)} / ${fmt(f.next_forecast?.draws)}`);
+ document.querySelector('#rows').innerHTML=cycles.length?cycles.map(c=>{const f=c.forecast||{},a=c.actual||{},e=c.forecast_errors||{},m=c.metrics||{},modes=[...new Set((c.matches||[]).map(x=>x.controller))].join(', ');return `<tr><td>${fmt(c.cycle)} / ${fmt(c.seed_start)}–${fmt(c.seed_end)}</td><td>${modes||'—'}</td><td>胜 ${fmt(f.laya_wins)} · 平 ${fmt(f.draws)}</td><td>胜 ${fmt(a.laya_wins)} · 平 ${fmt(a.draws)}</td><td>胜场差 ${fmt(e.absolute_win_count_error)} · 准确 ${fmt(e.per_match_accuracy)}</td><td><span class="pill">${c.safety_met?'达标':'未达标'} · 循环 ${fmt(100*(m.strict_cycle_degree||0))}% · 合法 ${fmt(100*(m.legal_action_rate||0))}%</span></td><td>${c.policy_update_accepted?'已采纳':'未采纳'}</td></tr>`}).join(''):'<tr><td colspan="7">尚无模型对局；启发式结果不会混入此表</td></tr>';
+ const conclusion=document.querySelector('#conclusion'); conclusion.textContent=d.conclusion||'模型权重尚未完成下载，真实推理与循环记录尚未开始；不声称已达标。'; conclusion.className='callout '+(d.balance_and_safety_stop_condition_met?'good':done?'':'');
+}
+fetch('./data.json',{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject()).then(render).catch(()=>render(fallback));
+</script>
+</body>
+</html>
