@@ -2387,5 +2387,13 @@
       "role": "记录审计"
     }
   ],
-  "market_data_status": "Binance public klines endpoint returned transport error on 2026-10-02; no fresh market figures inferred."
+  "market_data_status": "Binance public klines endpoint returned transport error on 2026-10-02; no fresh market figures inferred.",
+  "continuous_competition": {
+    "status": "计划已启用：24小时内每小时复核一次（共24次）；这是定时复核，不是1秒常驻进程。Binance连接器最近一次请求传输失败，当前没有新增市场预测或比赛分数。",
+    "exchange_orders_enabled": false,
+    "check_interval_hours": 1,
+    "market_data_available": false,
+    "duration_hours": 24,
+    "execution_mode": "public-data-only paper evaluation"
+  }
 }
