@@ -1,6 +1,12 @@
 # Laya Cycle Dashboard
 
+Live dashboard: https://gchat137.github.io/laya-cycle-dashboard/
+
+The dashboard presents replayable local simulation results. It does not submit exchange orders or use account credentials.
+
 Self-contained static dashboard for the real Laya decision-model game runs.
+
+Published dashboard: <https://gchat137.github.io/laya-cycle-dashboard/>.
 
 ## Preview
 
